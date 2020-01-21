@@ -20,7 +20,9 @@
 
 **Order :** <span class="md"><b class= "pk">Order#</b>, Customer#, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class= "rg">Item#, Description, Quantity, CurrentPrice, Amount</b>, Subtotal, GST, Total</span>
 
-**OrderDetails** <span class= "md"><b class="pk"><u class= "fk">Order#</u><u class= "fk">Item#</u></b>, Quantity, SellingPrice, Amount</span>
+### 2NF 
+
+**OrderDetails :** <span class= "md"><b class="pk"><u class= "fk">Order#</u><u class= "fk">Item#</u></b>, Quantity, SellingPrice, Amount</span>
 
 **Item** <span class="md"><b class="pk">Item#</b>, Description, CurrentPrice</span>
 
