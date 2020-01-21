@@ -4,7 +4,7 @@
 
 ### 0NF - 
 
-**Customer :** (<b class= "pk">Customer#</b>, FirstName, LastName, Address,City, Province, PostalCode, HomePhone)
+**Customer :** <span class= "md"><b class= "pk">Customer#</b>, FirstName, LastName, Address,City, Province, PostalCode, HomePhone</span>
 
 ### 1NF-3NF
 
@@ -18,7 +18,7 @@
 
 ### 0NF
 
-**Order :** (<b class= "pk">Order#</b>, Customer#, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class= "rg">Item#, Description, Quantity, CurrentPrice, Amount</b>, Subtotal, GST, Total)
+**Order :** <span class="md"><b class= "pk">Order#</b>, Customer#, FirstName, LastName, Address, City, Province, PostalCode, Phone, Date, <b class= "rg">Item#, Description, Quantity, CurrentPrice, Amount</b>, Subtotal, GST, Total</span>
 
 
 -----
@@ -122,7 +122,7 @@ pk:before {
 }
 
 .rg:after {
-    content: '\007B';
+    content: '\007D';
     color: darkorange;
     font-size: 1.1em;
     font-weight: bold;
