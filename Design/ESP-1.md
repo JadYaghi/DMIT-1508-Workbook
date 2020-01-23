@@ -12,7 +12,7 @@
 
 ### ERD
 
-> TODO: Place Image Here
+![Customers View](./ERD-CustomerView.png)
 
 ## Customer Orders View
 
@@ -31,6 +31,10 @@
 **Order** <span class= "md"><b class="pk">Customer#</b>, <u class="fk">Customer#</u>, Date, Subtotal, GST, Total
 
 **Customer** <span class="md"><b class="pk">Customer#</b>,FirstName, LastName, Address, City, Province, PostalCode, Phone
+
+### ERD
+
+![Customers Order View](./ERD-CustomerOrderView.png)
 
 -----
 
