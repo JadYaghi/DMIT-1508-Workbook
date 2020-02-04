@@ -55,7 +55,7 @@ CREATE TABLE Customers
                                         NOT NULL, -- NOT NULL means the data is required
     FirstName       varchar(50)         NOT NULL,
     LastName        varchar(60)         NOT NULL,
-    [Address]       varchar(40)         NOT NULL,
+    [Address]       varchar(40)         NOT NULL,--[] for it not to be a keyword
     City            varchar(35)         NOT NULL,
     Province        char(2)
         -- A DEFAULT constraint will supply a default value for a column
