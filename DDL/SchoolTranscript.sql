@@ -12,6 +12,8 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Students'
     DROP TABLE Students
 IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Courses')
     DROP TABLE Courses
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Invoice')
+    DROP TABLE Invoice
 
 
 --Create Tables
@@ -42,7 +44,7 @@ CREATE TABLE Courses
 	Number varchar(10)
 	CONSTRAINT PK_Courses_Number
             PRIMARY KEY	 NOT NULL,
-	Name varchar(50) NOT NULL,
+	[Name] varchar(50) NOT NULL,
     Credits decimal(3,1)
         CONSTRAINT CK_Courses_Credits
         CHECK (Credits>0 AND Credits <=6)    NOT NULL,
@@ -103,7 +105,28 @@ ALTER TABLE Students
     ADD PostalCode char(6) NULL
     -- Adding this as a nullable column, because students already exist, and we dont have postalcode for those students
 GO--Break Above code as a seperate batch
+
+--2
 ALTER TABLE Students
     ADD CONSTRAINT CK_Students_PostalCode
         CHECK (PostalCode LIKE '[a-z][0-9][a-z][0-9][a-z][0-9]')-- may be case sensitive, incase do [a-zA-Z]
 GO
+
+--3 Add default constraint for the status column of Student courses, Set 'E' as the Default Value 
+
+ALTER TABLE StudentCourses
+    ADD CONSTRAINT DF_StudentCourses_Status
+        DEFAULT ('E') FOR [Status] -- In alter table statement, column must be specified for default value
+GO
+-- Other Odds and ends
+sp_help Students -- get Schema for table
+
+
+-- In a Table, we can have somecolumns be "calculated" or "Derived" columns
+CREATE TABLE Invoice
+(
+    InvoiceId   int     NOT NULL,
+    Subtotal    money   NOT NULL,
+    GST         money   NOT NULL,
+    Total       AS Subtotal + GST-- This is a computed Column
+)
