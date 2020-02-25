@@ -5,6 +5,11 @@
 Use [A01-School]
 GO
 
+-- Q. what is Avg of Numbers
+-- 97 43 53 29 40 77 10 55 37 82
+-- 52.3
+
+
 --1.	Select the average Mark from all the Marks in the registration table
 SELECT  AVG(Mark) AS 'Average Mark'
 FROM    Registration
@@ -57,7 +62,9 @@ WHERE   CourseId = 'DMIT152'
 
 --5.	Select the average payment amount for payment type 5
 -- TODO: Student Answer Here - Hint: It's in the Payment table....
-
+SELECT AVG(Amount) AS 'Amount'
+FROM Payment
+Where PaymentID = 5
 
 -- Given that there are some other aggregate methods like MAX(columnName) and MIN(columnName), complete the following two questions:
 --6. Select the highest payment amount
