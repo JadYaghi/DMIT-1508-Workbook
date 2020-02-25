@@ -2,6 +2,12 @@
 USE [A01-School]
 GO
 
+--We express relationships between tablesin our design through foreign key restraints
+-- but those constraints simply check/restrinct info that is stored in the foreign key column
+--it doen not actually physically connect  the tables - all these tables are independent
+--that means when we try to pull info from multiple related tables, we have to state the connection between those tables
+--we have to state how the tables JOIN together 
+
 --1.	Select Student full names and the course ID's they are registered in.
 SELECT  FirstName + ' ' + LastName AS 'Full Name',
         CourseId
@@ -84,7 +90,11 @@ WHERE   S.StudentID = 199912010
 
 --9. What are the Student Names, courseID's with individual Marks at 80% or higher? Sort the results by course.
 -- TODO: Student Answer Here...
-
+SELECT  FirstName + ' ' + LastName AS 'Student', CourseId, Mark
+FROM Student S 
+    INNER JOIN Registration R ON s.StudentID = r.StudentID
+HAVING Mark >= 80
+ORDER BY Mark
 --10. Modify the script from the previous question to show the Course Name along with the ID.
 -- TODO: Student Answer Here...
 
