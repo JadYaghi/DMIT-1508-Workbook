@@ -22,7 +22,7 @@ GO
     SELECT REVERSE('Dan')
     -- (Club whose id is a palindrome)
     -- Select the insert statement below to add a row into the Club table
-    -- INSERT INTO Club(ClubId, ClubName) VALUES ('ABCBA', 'Active Bat Catching Brotherhood Assoc.')
+    -- INSERT INTO Club(ClubId, ClubName) VALUES ('ABBA', 'Active Bat Brotherhood Assoc.')
 	SELECT	ClubId, ClubName
 	FROM	Club
 	WHERE   ClubId = REVERSE(ClubId)
@@ -34,7 +34,7 @@ GO
 	-- GETDATE()
 	SELECT GETDATE() AS 'Database Server- Current Date/Time'
 	-- DATENAME - See https://msdn.microsoft.com/en-CA/library/ms174395.aspx for DateParts
-	SELECT DATENAME(MONTH, GETDATE()) AS 'Database Server- Current Month'
+	SELECT LEFT(DATENAME(MONTH, GETDATE()), 3) AS 'Database Server- Current Month'
 	-- DATEPART - Similar to above
 	SELECT DATEPART(WEEKDAY, GETDATE()) AS 'Day of the week',
 	       DATENAME(WEEKDAY, GETDATE()) AS 'Day of the week'
@@ -91,16 +91,21 @@ WHERE   Mark IS NOT NULL
   AND   LEFT(Semester, 4) = 2004
 
 -- 6. select last three characters of all the courses
-
-
+SELECT RIGHT(CourseName, 3)
+FROM Course C
 -- 7. Select the characters in the position description from characters 8 to 13 for PositionID 5
-
+SELECT SUBSTRING(PositionDescription, 8, 5)
+FROM Position
+WHERE PositionID = 5
 
 -- 8. Select all the Student First Names as upper case.
-
+SELECT UPPER(S.FirstName)
+FROM Student S
 
 -- 9. Select the First Names of students whose first names are 3 characters long.
-
+SELECT S.FirstName
+FROM Student S
+WHERE S.FirstName LIKE '___'
 
 /* ************************************************
     String Functions

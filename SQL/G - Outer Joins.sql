@@ -41,6 +41,11 @@ FROM    Student S
 GROUP BY FirstName, LastName
 --5. How many students are in each club? Display club name and count.
 -- TODO: Student Answer Here...
+SELECT C.ClubName, COUNT(A.StudentID) AS 'Members'
+FROM Club C
+    LEFT OUTER JOIN Activity A ON C.ClubId = A.ClubId 
+GROUP BY C.ClubName
+ORDER BY 'Members' desc
 
 --6. How many times has each course been offered? Display the course ID and course name along with the number of times it has been offered.
 -- TODO: Student Answer Here...

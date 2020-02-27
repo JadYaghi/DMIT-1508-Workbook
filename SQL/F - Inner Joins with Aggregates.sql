@@ -25,8 +25,10 @@ ORDER BY 'Average Mark' DESC
 
 --3. How many payments where made for each payment type. Display the PaymentTypeDescription and the count.
  -- TODO: Student Answer Here... 
-
- 
+ SELECT  T.PaymentTypeDescription,COUNT(P.PaymentID)
+ FROM Payment P
+    INNER JOIN PaymentType T ON P.PaymentTypeID = T.PaymentTypeID
+GROUP BY T.PaymentTypeDescription
 --4. Select the average Mark for each student. Display the Student Name and their average mark. Use table aliases in your FROM & JOIN clause.
 SELECT  S.FirstName  + ' ' + S.LastName AS 'Student Name',
         AVG(R.Mark)                     AS 'Average'
@@ -38,11 +40,25 @@ GROUP BY    S.FirstName  + ' ' + S.LastName  -- Since my non-aggregate is an exp
 
 --5. Select the same data as question 4 but only show the student names and averages that are 80% or higher. (HINT: Remember the HAVING clause?)
  -- TODO: Student Answer Here... 
+ SELECT  S.FirstName  + ' ' + S.LastName AS 'Student Name',
+        AVG(R.Mark)                     AS 'Average'
+FROM    Registration AS R
+        INNER JOIN Student AS S
+            ON S.StudentID = R.StudentID
+WHERE R.Mark >= 80
+GROUP BY    S.FirstName  + ' ' + S.LastName
 
 
 --6. What is the highest, lowest and average payment amount for each payment type Description?
  -- TODO: Student Answer Here... 
-
- 
+ SELECT MAX(P.Amount), MIN(P.Amount), AVG(P.Amount), T.PaymentTypeDescription
+ FROM Payment P
+    INNER JOIN PaymentType T ON p.PaymentTypeID = t.PaymentTypeID
+GROUP BY T.PaymentTypeDescription
 --7. Which clubs have 3 or more students in them? Display the Club Names.
  -- TODO: Student Answer Here... 
+ SELECT C.ClubName, COUNT(A.StudentID)
+ FROM Club C
+    INNER JOIN Activity A ON A.ClubId = C.ClubId
+GROUP BY ClubName
+ HAVING COUNT(A.StudentID) >= 3
