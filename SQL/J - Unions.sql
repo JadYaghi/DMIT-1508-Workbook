@@ -2,6 +2,10 @@
 USE [A01-School]
 GO
 
+-- Union allows us to combine the results of 2 or more individual select statmetns.
+-- for the union to work, however, the number, order and data type of the colums in select must match
+-- rarely used 
+
 --1.	Write a script that will produce the 'It Happened in October' display.
 --The output of the display is shown below
 /*

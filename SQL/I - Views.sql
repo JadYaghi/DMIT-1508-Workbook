@@ -2,6 +2,8 @@
 USE [A01-School]
 GO
 
+--view
+
 --1.  Create a view of staff full names called StaffList.
 IF OBJECT_ID('StaffList', 'V') IS NOT NULL
     DROP VIEW StaffList
