@@ -48,7 +48,9 @@ WHERE  City = 'Edm'
 -- 5. For each student that does not have a mark in the Registration table,
 --    create an update statement that gives each student a different mark.
 -- TODO: Student Answer Here....
-
+UPDATE Registration
+SET Mark = (select FLOOR(RAND()*(101)) as Mark)
+WHERE Mark IS NULL
 -- 6. Choose a student from the previous question and withdraw them from all
 --    their courses.
 -- TODO: Student Answer Here....
