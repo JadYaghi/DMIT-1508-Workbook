@@ -167,11 +167,38 @@ GO
 
 
 -- 5. Create a stored procedure that will remove a student from a club. Call it RemoveFromClub.
-
-
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'RemoveFromClub')
+    DROP PROCEDURE RemoveFromClub
+GO
+CREATE PROCEDURE RemoveFromClub
+    @StudentId  int,
+    @cludId     varchar(10)
+AS
+    IF @StudentId IS NULL 
+        RAISERROR('StudentID is needed', 16,1)
+    ELSE
+        DELETE FROM Activity
+            WHERE StudentID = @StudentId
+RETURN
+GO
 -- Query-based Stored Procedures
 -- 6. Create a stored procedure that will display all the staff and their position in the school.
 --    Show the full name of the staff member and the description of their position.
+CREATE PROCEDURE DisplayStaffPosition
+    @StaffID    smallint,
+    @PositionID tinyint
+AS
+    IF @StaffID IS NUll 
+        RAISERROR('StaffID is needed', 16,1)
+    ELSE
+    BEGIN
+        SELECT StaffID, PositionID
+        FROM Staff
+        WHERE StaffID = @StaffID
+    END
+RETURN
+GO
+
 
 -- 7. Display all the final course marks for a given student. Include the name and number of the course
 --    along with the student's mark.
