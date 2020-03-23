@@ -454,3 +454,47 @@ AS
 RETURN
 GO
 
+--1. sp_help ClubID
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = N'PROCEDURE' AND ROUTINE_NAME = 'DissolveClub')
+    DROP PROCEDURE DissolveClub
+GO
+
+CREATE PROCEDURE    DissolveClub
+    @ClubId varchar(10)
+AS
+    IF @ClubId is NULL
+        Begin 
+            RaisError ('Club ID is required',16,1)
+        End
+    ELSE
+        Begin
+            If NOT EXISTS(SELECT  CLubId FROM Club where ClubId = @ClubId)
+            begin
+                RaisError('That Club doesnt Exist',16,1)
+            end
+            Else
+            Begin
+                Begin Transaction
+                    Delete from Activity WHERE ClubId = @ClubId
+                    IF @@ERROR <> 0
+                    begin
+                        ROLLBACK TRANSACTION
+                        RAISERROR('Unable to remove members from the club',16,1)
+                    end
+                    ELSE
+                    Begin
+                        DELETE FROM Club WHERE ClubId = @ClubId
+                        IF @@ERROR <> 0 OR @@ROWCOUNT = 0
+                        BEGIN   
+                            ROLLBACK TRANSACTION
+                            RAISERROR('Unable to Delete the club',16,1)
+                        END
+                        ELSE 
+                        BEGIN
+                            COMMIT TRANSACTION
+                        END
+                    end
+               end
+        end
+return
+go
